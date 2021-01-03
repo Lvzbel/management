@@ -19,7 +19,7 @@
                         Phone: {{ $employee->phone ? $employee->phone : 'Not avaible'}}
                     </div>
                     <div>
-                        Position: {{ $employee->positions->first()->name }}
+                        Position: {{ $employee->positions->count() ? $employee->positions->first()->name : 'Not avaible' }}
                     </div>
                     <div>
                         <a href="{{ route('employees.edit', $employee) }}">Edit</a>
