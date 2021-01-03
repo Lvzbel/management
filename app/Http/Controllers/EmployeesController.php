@@ -41,7 +41,11 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = User::with('positions')->find($id);
+
+        $positions = Position::all();
+
+        return view('employees.edit', compact('employee', 'positions'));
     }
 
     /**
