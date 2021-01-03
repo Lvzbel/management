@@ -43,4 +43,20 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Position::class);
     }
+
+    public function has_position()
+    {
+        return $this->positions()->count();
+    }
+
+    public function get_position()
+    {
+        if ($this->has_position()) {
+            $position = $this->positions()->first();
+        } else {
+            $position = (object) array('id' => 0, 'name' => 'none');
+        }
+
+        return $position;
+    }
 }
