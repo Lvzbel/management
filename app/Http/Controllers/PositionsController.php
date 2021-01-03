@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Position;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PositionsController extends Controller
@@ -14,7 +15,9 @@ class PositionsController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+
+        return view('positions.index', compact('positions'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PositionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('positions.create');
     }
 
     /**
@@ -35,7 +38,19 @@ class PositionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $name = ucfirst(strtolower($validated['name']));
+        $slug = Str::slug($name, "-");
+
+        Position::create([
+            'name' => $name,
+            'slug' => $slug
+        ]);
+
+        return redirect('positions');
     }
 
     /**
@@ -44,9 +59,11 @@ class PositionsController extends Controller
      * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function show(Position $position)
+    public function show(Position $slug)
     {
-        //
+        return view('positions.show', [
+            'position' => $slug
+        ]);
     }
 
     /**
@@ -55,9 +72,11 @@ class PositionsController extends Controller
      * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function edit(Position $position)
+    public function edit(Position $slug)
     {
-        //
+        return view('positions.edit', [
+            'position' => $slug
+        ]);
     }
 
     /**
@@ -67,9 +86,20 @@ class PositionsController extends Controller
      * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Position $position)
+    public function update(Request $request, Position $slug)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $name = ucfirst(strtolower($validated['name']));
+
+        $slug->update([
+            'name' => $name,
+            'slug' => Str::slug($name, "-")
+        ]);
+
+        return redirect(route('positions', $slug));
     }
 
     /**
