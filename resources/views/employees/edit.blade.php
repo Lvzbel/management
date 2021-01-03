@@ -44,7 +44,7 @@
                                 </div>
                             @enderror
                         </div>
-
+                        <div>
                         <label for="position">Employee Position</label>
                         <select name="position" id="position">
                             <option {{ $employee->get_position()->id === 0 ? "selected" : ""}} value="0" {{ $employee->get_position()->id === 0 ?? 'selected' }}>None</option>
@@ -59,9 +59,9 @@
                             </div>
                         @enderror
                     </div>
-                        <div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Update</button>
-                        </div>
+                    <div>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Update</button>
+                    </div>
                     </form>
                 </div>
             </div>
