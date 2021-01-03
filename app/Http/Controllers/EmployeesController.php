@@ -57,6 +57,32 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'position' => 'nullable|string'
+        ]);
+
+        $employee = User::with('positions')->find($id);
+
+        $newValues = array();
+
+        if ($employee->name !== $validated['name']) {
+            $newValues['name'] = $validated['name'];
+        }
+        if ($employee->email !== $validated['email']) {
+            $newValues['email'] = $validated['email'];
+        }
+        // if ($employee->phone !== $validated['phone']) {
+        //     $newValues['phone'] = $validated['phone'];
+        // }
+        if ($employee->get_position()->id != $validated['position']) {
+            $employee->positions()->detach();
+            $employee->positions()->attach($validated['position']);
+        }
+
+        $employee->update($newValues);
+
+        return redirect(route('employees.show', $employee));
     }
 }
