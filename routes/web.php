@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PositionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// Employees
+Route::get('/employees', [EmployeesController::class, 'index'])->name('employees');
+Route::get('/employees/{employe}', [EmployeesController::class, 'show'])->name('employees.show');
+Route::get('/employees/{employe}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
+Route::post('/employees/{employe}', [EmployeesController::class, 'update'])->name('employees.update');
 
 // Positions
 Route::get('/positions', [PositionsController::class, 'index'])->name('positions');
