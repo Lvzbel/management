@@ -21,8 +21,8 @@ Route::put('/employees/{employe}', [EmployeesController::class, 'update'])->name
 // Positions
 Route::get('/positions', [PositionsController::class, 'index'])->name('positions');
 Route::post('/positions', [PositionsController::class, 'store']);
-Route::get('/positions/{slug}', [PositionsController::class, 'show'])->name('positions.show');
 Route::get('/positions/create', [PositionsController::class, 'create'])->name('positions.create');
+Route::get('/positions/{slug}', [PositionsController::class, 'show'])->name('positions.show');
 Route::get('/positions/{slug}/edit', [PositionsController::class, 'edit'])->name('positions.edit');
 Route::put('/positions/{slug}', [PositionsController::class, 'update'])->name('positions.update');
 
