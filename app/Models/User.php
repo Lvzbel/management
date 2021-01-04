@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Position::class);
     }
 
+    public function availability()
+    {
+        return $this->hasOne(Availability::class);
+    }
+
     public function has_position()
     {
         return $this->positions()->count();
