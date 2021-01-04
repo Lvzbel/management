@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Add Availability Table to each user
-        User::all()->each(function ($user) {
+        User::where('role', 'employee')->each(function ($user) {
             $user->availability()->create();
             $user->positions()->attach(rand(1, 5));
         });
