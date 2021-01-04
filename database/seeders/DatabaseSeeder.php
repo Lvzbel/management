@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,9 +24,22 @@ class DatabaseSeeder extends Seeder
 
         User::factory(15)->create();
 
+        $positions = [
+            ['name' => 'Cook', 'slug' => 'cook'],
+            ['name' => 'Prep', 'slug' => 'prep'],
+            ['name' => 'Cleaning', 'slug' => 'cleaning'],
+            ['name' => 'Tort', 'slug' => 'tort'],
+            ['name' => 'Waitress', 'slug' => 'waitress'],
+        ];
+
+        foreach ($positions as $position) {
+            Position::create($position);
+        }
+
         // Add Availability Table to each user
         User::all()->each(function ($user) {
             $user->availability()->create();
+            $user->positions()->attach(rand(1, 5));
         });
     }
 }
