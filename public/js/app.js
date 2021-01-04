@@ -3894,98 +3894,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["availability"],
+  data: function data() {
+    return {
+      isEditing: false,
+      days: [{
+        label: "Monday",
+        am: this.availability.monday_am,
+        pm: this.availability.monday_pm
+      }, {
+        label: "Tuesday",
+        am: this.availability.tuesday_am,
+        pm: this.availability.tuesday_pm
+      }, {
+        label: "Wednesday",
+        am: this.availability.wednesday_am,
+        pm: this.availability.wednesday_pm
+      }, {
+        label: "Thursday",
+        am: this.availability.thursday_am,
+        pm: this.availability.thursday_pm
+      }, {
+        label: "Friday",
+        am: this.availability.friday_am,
+        pm: this.availability.friday_pm
+      }, {
+        label: "Saturday",
+        am: this.availability.saturday_am,
+        pm: this.availability.saturday_pm
+      }, {
+        label: "Sunday",
+        am: this.availability.sunday_am,
+        pm: this.availability.sunday_pm
+      }]
+    };
+  },
   methods: {
     isAvailable: function isAvailable(data) {
       if (data) {
@@ -3993,6 +3937,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return "bg-red-200 hover:bg-red-300";
       }
+    },
+    toggleEditing: function toggleEditing() {
+      this.isEditing = !this.isEditing;
     }
   }
 });
@@ -21668,193 +21615,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "flex flex-row w-full text-center divide-x divide-white" },
-    [
-      _c("div", { staticClass: "flex-1" }, [
+  return _c("div", { staticClass: "w-full py-5" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "flex flex-row w-11/12 mx-auto text-center divide-x divide-white shadow-sm"
+      },
+      _vm._l(_vm.days, function(day) {
+        return _c("div", { key: day.label, staticClass: "flex-1" }, [
+          _c(
+            "div",
+            {
+              staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white"
+            },
+            [
+              _vm._v(
+                "\n                " + _vm._s(day.label) + "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "p-1.5 border-b border-white",
+              class: _vm.isAvailable(day.am)
+            },
+            [_vm._v("\n                AM\n            ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "p-1.5 border-b border-white",
+              class: _vm.isAvailable(day.pm)
+            },
+            [_vm._v("\n                PM\n            ")]
+          )
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-row justify-end w-11/12 mx-auto py-2" },
+      [
         _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Monday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
+          "button",
           {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.monday_am)
+            staticClass:
+              "bg-gray-800 hover:bg-gray-700 text-white w-min px-3 px-2 rounded pointer",
+            on: { click: _vm.toggleEditing }
           },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.monday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.isEditing ? "Cancel" : "Edit") +
+                "\n        "
+            )
+          ]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Tuesday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.tuesday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.tuesday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Wednesday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.wednesday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.wednesday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Thursday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.thursday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.thursday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Friday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.friday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.friday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Saturday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.saturday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.saturday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _c(
-          "div",
-          { staticClass: "font-bold bg-blue-200 p-1.5 border-b border-white" },
-          [_vm._v("\n            Sunday\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.sunday_am)
-          },
-          [_vm._v("\n            AM\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "p-1.5 border-b border-white",
-            class: _vm.isAvailable(_vm.availability.sunday_pm)
-          },
-          [_vm._v("\n            PM\n        ")]
-        )
-      ])
-    ]
-  )
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

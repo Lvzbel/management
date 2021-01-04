@@ -22,7 +22,7 @@
                         Position: {{ $employee->has_position() ? $employee->get_position()->name : 'Not avaible' }}
                     </div>
                     <div>
-                        <a class="block bg-blue-500 text-white px-4 py-3 rounded font-medium w-24 text-center mt-1 mb-1" href="{{ route('employees.edit', $employee) }}">Edit</a>
+                        <a class="block bg-blue-500 text-white px-4 py-2 rounded font-medium w-min text-center mt-1 mb-1 pointer" href="{{ route('employees.edit', $employee) }}">Edit</a>
                     </div>
 
                     <div>
