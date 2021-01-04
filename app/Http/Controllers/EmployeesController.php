@@ -28,7 +28,7 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        $employee = User::with('positions')->find($id);
+        $employee = User::with(['positions', 'availability'])->find($id);
 
         return view('employees.show', compact('employee'));
     }
