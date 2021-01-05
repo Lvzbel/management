@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PositionsController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::get('/employees', [EmployeesController::class, 'index'])->name('employees
 Route::get('/employees/{employe}', [EmployeesController::class, 'show'])->name('employees.show');
 Route::get('/employees/{employe}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
 Route::put('/employees/{employe}', [EmployeesController::class, 'update'])->name('employees.update');
+
+// Availability
+Route::post('/employees/availability', [AvailabilityController::class, 'update'])->name('availability.update');
 
 // Positions
 Route::get('/positions', [PositionsController::class, 'index'])->name('positions');
