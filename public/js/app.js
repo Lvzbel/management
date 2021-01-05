@@ -3894,11 +3894,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["availability"],
+  props: ["availability", "token", "user"],
   data: function data() {
     return {
       isEditing: false,
+      isLoading: false,
       days: [{
         label: "Monday",
         am: this.availability.monday_am,
@@ -3940,6 +3971,65 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleEditing: function toggleEditing() {
       this.isEditing = !this.isEditing;
+    },
+    toggleDay: function toggleDay(day, time) {
+      if (this.isEditing) {
+        var index = this.days.findIndex(function (element) {
+          return element.label === day;
+        });
+        this.days[index][time] = !this.days[index][time];
+      }
+    },
+    saveDays: function saveDays() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios({
+        method: "post",
+        url: "availability",
+        headers: {
+          "X-CSRF-TOKEN": this.token
+        },
+        data: {
+          user_id: this.user,
+          days: this.days
+        }
+      }).then(function (response) {
+        _this.isLoading = false;
+        _this.isEditing = false;
+      });
+    },
+    cancelEdit: function cancelEdit() {
+      this.isEditing = false;
+      this.days = [{
+        label: "Monday",
+        am: this.availability.monday_am,
+        pm: this.availability.monday_pm
+      }, {
+        label: "Tuesday",
+        am: this.availability.tuesday_am,
+        pm: this.availability.tuesday_pm
+      }, {
+        label: "Wednesday",
+        am: this.availability.wednesday_am,
+        pm: this.availability.wednesday_pm
+      }, {
+        label: "Thursday",
+        am: this.availability.thursday_am,
+        pm: this.availability.thursday_pm
+      }, {
+        label: "Friday",
+        am: this.availability.friday_am,
+        pm: this.availability.friday_pm
+      }, {
+        label: "Saturday",
+        am: this.availability.saturday_am,
+        pm: this.availability.saturday_pm
+      }, {
+        label: "Sunday",
+        am: this.availability.sunday_am,
+        pm: this.availability.sunday_pm
+      }];
     }
   }
 });
@@ -21640,7 +21730,16 @@ var render = function() {
             "div",
             {
               staticClass: "p-1.5 border-b border-white",
-              class: _vm.isAvailable(day.am)
+              class: _vm.isAvailable(day.am),
+              on: {
+                click: function($event) {
+                  {
+                    {
+                      _vm.toggleDay(day.label, "am")
+                    }
+                  }
+                }
+              }
             },
             [_vm._v("\n                AM\n            ")]
           ),
@@ -21649,7 +21748,16 @@ var render = function() {
             "div",
             {
               staticClass: "p-1.5 border-b border-white",
-              class: _vm.isAvailable(day.pm)
+              class: _vm.isAvailable(day.pm),
+              on: {
+                click: function($event) {
+                  {
+                    {
+                      _vm.toggleDay(day.label, "pm")
+                    }
+                  }
+                }
+              }
             },
             [_vm._v("\n                PM\n            ")]
           )
@@ -21662,21 +21770,45 @@ var render = function() {
       "div",
       { staticClass: "flex flex-row justify-end w-11/12 mx-auto py-2" },
       [
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-gray-800 hover:bg-gray-700 text-white w-min px-3 px-2 rounded pointer",
-            on: { click: _vm.toggleEditing }
-          },
-          [
-            _vm._v(
-              "\n            " +
-                _vm._s(_vm.isEditing ? "Cancel" : "Edit") +
-                "\n        "
-            )
-          ]
-        )
+        _vm.isEditing
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-red-600 hover:bg-red-500 text-white w-min px-3 px-2 rounded pointer",
+                  on: { click: _vm.cancelEdit }
+                },
+                [_vm._v("\n                Cancel\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue-600 hover:bg-blue-500 text-white w-min px-3 px-2 rounded pointer",
+                  on: { click: _vm.saveDays }
+                },
+                [_vm._v("\n                Save\n            ")]
+              )
+            ])
+          : _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-gray-800 hover:bg-gray-700 text-white w-min px-3 px-2 rounded pointer",
+                  on: { click: _vm.toggleEditing }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.isEditing ? "Cancel" : "Edit") +
+                      "\n            "
+                  )
+                ]
+              )
+            ])
       ]
     )
   ])
