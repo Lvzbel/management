@@ -3,83 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Availability;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AvailabilityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'user_id' => 'numeric|required',
+            'days' => 'array|required'
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $employee = User::find($validated['user_id']);
+        $days = $validated['days'];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Availability  $availability
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Availability $availability)
-    {
-        //
-    }
+        $employee->availability()->update([
+            'monday_am' => $days[0]['am'],
+            'monday_pm' => $days[0]['pm'],
+            'tuesday_am' => $days[1]['am'],
+            'tuesday_pm' => $days[1]['pm'],
+            'wednesday_am' => $days[2]['am'],
+            'wednesday_pm' => $days[2]['pm'],
+            'thursday_am' => $days[3]['am'],
+            'thursday_pm' => $days[3]['pm'],
+            'friday_am' => $days[4]['am'],
+            'friday_pm' => $days[4]['pm'],
+            'saturday_am' => $days[5]['am'],
+            'saturday_pm' => $days[5]['pm'],
+            'sunday_am' => $days[6]['am'],
+            'sunday_pm' => $days[6]['pm'],
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Availability  $availability
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Availability $availability)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Availability  $availability
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Availability $availability)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Availability  $availability
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Availability $availability)
-    {
-        //
+        return $employee;
     }
 }
