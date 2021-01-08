@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Position;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
         User::where('role', 'employee')->each(function ($user) {
             $user->availability()->create();
             $user->positions()->attach(rand(1, 5));
+            $user->schedules()->create(['week_number' => Carbon::now()->weekOfYear ]);
         });
     }
 }
