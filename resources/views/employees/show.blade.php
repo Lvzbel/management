@@ -26,7 +26,7 @@
                     </div>
 
                     <div>
-                        <availability :availability="{{ $employee->availability }}" token="{{ csrf_token() }}" user="{{ $employee->id }}"></availability>
+                        <availability :availability="{{ $employee->availability }}" user="{{ $employee->id }}"></availability>
                     </div>
                 </div>
             </div>

@@ -64,7 +64,7 @@
 
 <script>
 export default {
-    props: ["availability", "token", "user"],
+    props: ["availability", "user"],
     data: function() {
         return {
             isEditing: false,
@@ -134,9 +134,6 @@ export default {
             axios({
                 method: "post",
                 url: "availability",
-                headers: {
-                    "X-CSRF-TOKEN": this.token
-                },
                 data: {
                     user_id: this.user,
                     days: this.days
