@@ -28,6 +28,10 @@
                     <div>
                         <availability :availability="{{ $employee->availability }}" user="{{ $employee->id }}"></availability>
                     </div>
+
+                    <div>
+                        <schedule :schedule="{{ $employee->getSchedule() }}"></schedule>
+                    </div>
                 </div>
             </div>
         </div>
