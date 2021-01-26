@@ -3987,9 +3987,6 @@ __webpack_require__.r(__webpack_exports__);
       axios({
         method: "post",
         url: "availability",
-        headers: {
-          "X-CSRF-TOKEN": this.token
-        },
         data: {
           user_id: this.user,
           days: this.days
@@ -34054,7 +34051,11 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.axios.defaults.headers.common = {
+//     'X-Requested-With': 'XMLHttpRequest',
+//     'X-CSRF-TOKEN': '',
+//   };
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
