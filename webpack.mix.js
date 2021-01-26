@@ -16,3 +16,11 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
+
+mix.webpackConfig({
+    devServer: {
+        proxy: {
+            '*': 'http://localhost:8000'
+        }
+    }
+});
