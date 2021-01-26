@@ -64,4 +64,9 @@ class User extends Authenticatable
 
         return $position;
     }
+
+    public function getSchedule()
+    {
+        return $this->schedules()->first();
+    }
 }
