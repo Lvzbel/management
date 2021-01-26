@@ -17,33 +17,33 @@ class CreateSchedulesTable extends Migration
             $table->id();
             $table->timestamps();
 
-            // Work Week Number
-            $table->integer('week_number');
-
             // Relation
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
+            $table->timestamp('week_start')->require();
+            $table->timestamp('week_end')->require();
+
             // Week Days Start & End
-            $table->date('start_monday')->nullable();
-            $table->date('end_monday')->nullable();
+            $table->timestamp('start_monday')->nullable();
+            $table->timestamp('end_monday')->nullable();
 
-            $table->date('start_tuesday')->nullable();
-            $table->date('end_tuesday')->nullable();
+            $table->timestamp('start_tuesday')->nullable();
+            $table->timestamp('end_tuesday')->nullable();
 
-            $table->date('start_wednesday')->nullable();
-            $table->date('end_wednesday')->nullable();
+            $table->timestamp('start_wednesday')->nullable();
+            $table->timestamp('end_wednesday')->nullable();
 
-            $table->date('start_thursday')->nullable();
-            $table->date('end_thursday')->nullable();
+            $table->timestamp('start_thursday')->nullable();
+            $table->timestamp('end_thursday')->nullable();
 
-            $table->date('start_friday')->nullable();
-            $table->date('end_friday')->nullable();
+            $table->timestamp('start_friday')->nullable();
+            $table->timestamp('end_friday')->nullable();
 
-            $table->date('start_saturday')->nullable();
-            $table->date('end_saturday')->nullable();
+            $table->timestamp('start_saturday')->nullable();
+            $table->timestamp('end_saturday')->nullable();
 
-            $table->date('start_sunday')->nullable();
-            $table->date('end_sunday')->nullable();
+            $table->timestamp('start_sunday')->nullable();
+            $table->timestamp('end_sunday')->nullable();
         });
     }
 
