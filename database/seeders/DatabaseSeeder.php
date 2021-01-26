@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Position;
 use App\Models\User;
-use Carbon\Carbon;
+use App\Models\Position;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -41,7 +42,19 @@ class DatabaseSeeder extends Seeder
         User::where('role', 'employee')->each(function ($user) {
             $user->availability()->create();
             $user->positions()->attach(rand(1, 5));
-            $user->schedules()->create(['week_number' => Carbon::now()->weekOfYear ]);
+
+            $currentWeek = CarbonImmutable::now()->locale('en_US');
+            $nextWeek = $currentWeek->addWeek();
+
+            $user->schedules()->create([
+                'week_start' => $currentWeek->startOfWeek(Carbon::MONDAY),
+                'week_end' => $currentWeek->endOfWeek(Carbon::SUNDAY)
+            ]);
+
+            $user->schedules()->create([
+                'week_start' => $nextWeek->startOfWeek(Carbon::MONDAY),
+                'week_end' => $nextWeek->endOfWeek(Carbon::SUNDAY)
+            ]);
         });
     }
 }
