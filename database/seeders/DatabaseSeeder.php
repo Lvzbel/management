@@ -48,12 +48,32 @@ class DatabaseSeeder extends Seeder
 
             $user->schedules()->create([
                 'week_start' => $currentWeek->startOfWeek(Carbon::MONDAY),
-                'week_end' => $currentWeek->endOfWeek(Carbon::SUNDAY)
+                'week_end' => $currentWeek->endOfWeek(Carbon::SUNDAY),
+                'start_monday' => $currentWeek->addDay()->hour(8)->minute(0),
+                'end_monday' => $currentWeek->addDay()->hour(17)->minute(0),
+                'start_tuesday' => $currentWeek->addDay(2)->hour(8)->minute(0),
+                'end_tuesday' => $currentWeek->addDay(2)->hour(17)->minute(0),
+                'start_wednesday' => $currentWeek->addDay(3)->hour(8)->minute(0),
+                'end_wednesday' => $currentWeek->addDay(3)->hour(17)->minute(0),
+                'start_thursday' => $currentWeek->addDay(4)->hour(8)->minute(0),
+                'end_thursday' => $currentWeek->addDay(4)->hour(17)->minute(0),
+                'start_friday' => $currentWeek->addDay(5)->hour(8)->minute(0),
+                'end_friday' => $currentWeek->addDay(5)->hour(17)->minute(0),
             ]);
 
             $user->schedules()->create([
                 'week_start' => $nextWeek->startOfWeek(Carbon::MONDAY),
-                'week_end' => $nextWeek->endOfWeek(Carbon::SUNDAY)
+                'week_end' => $nextWeek->endOfWeek(Carbon::SUNDAY),
+                'start_monday' => $nextWeek->addDay()->hour(8)->minute(0),
+                'end_monday' => $nextWeek->addDay()->hour(17)->minute(0),
+                'start_tuesday' => $nextWeek->addDay(2)->hour(8)->minute(0),
+                'end_tuesday' => $nextWeek->addDay(2)->hour(17)->minute(0),
+                'start_wednesday' => $nextWeek->addDay(3)->hour(8)->minute(0),
+                'end_wednesday' => $nextWeek->addDay(3)->hour(17)->minute(0),
+                'start_thursday' => $nextWeek->addDay(4)->hour(8)->minute(0),
+                'end_thursday' => $nextWeek->addDay(4)->hour(17)->minute(0),
+                'start_friday' => $nextWeek->addDay(5)->hour(8)->minute(0),
+                'end_friday' => $nextWeek->addDay(5)->hour(17)->minute(0),
             ]);
         });
     }
